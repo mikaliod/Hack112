@@ -1,0 +1,109 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+       <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+       <!--NavBar-->
+      <div class="navbar-fixed">
+      <nav>
+      <div class="nav-wrapper red darken-4">
+        <ul class="left">
+          <li><a href="{{ url_for('mapRed') }}">Map</a></li>
+          <li><a href="{{ url_for('portalsRed') }}">Portals Status</a></li>
+          <li class="active"><a href="{{ url_for('helpRed') }}">Help</a></li>
+        </ul>
+      </div>
+      </nav>
+      </div>
+      
+      <div class="row">
+
+      <div class="col s12">
+        <p class="thin center-align red-text text-darken-4" style="font-size: 60px;">Basic Instructions</p>
+        
+      </div>
+
+    </div>
+    
+    <div class="row">
+       <div class="container">
+                <div class="col s12 left-align">
+                    <h5><span class="bold red-text text-darken-4">Map</span><span class="thin"> You can view the map of the campus and check out all the locations of the portals in the Map Page. Hack button is at the bottom-right corner.</span></h5>
+                </div>
+            </div>
+            </div>
+            
+      <div class="row">
+       <div class="container">
+                <div class="col s12 left-align">
+                    <h5><span class="bold red-text text-darken-4">Hack</span><span class="thin"> When you are near a portal, by pressing the Hack button, you can hack the portal. More rules of hacking will be explained later on this page.</span></h5>
+                </div>
+            </div>
+            </div>
+            
+      <div class="row">
+       <div class="container">
+                <div class="col s12 left-align">
+                    <h5><span class="bold red-text text-darken-4">Portals</span><span class="thin"> You can check out the status of the portals in the portals status page, whether they're occupied or not, or the owner team of the portal.</span></h5>
+                </div>
+            </div>
+            </div>
+            
+      <div class="row">
+
+      <div class="col s12">
+        <p class="thin center-align red-text text-darken-4" style="font-size: 60px;">Hack Rules</p>
+        
+      </div>
+
+    </div>
+    
+    <div class="row">
+       <div class="container">
+                <div class="col s12 left-align">
+                    <h5><span class="bold red-text text-darken-4">Unoccupied Portals</span><span class="thin"> When a portal is unoccupied, either team can hack the portal and take over the portal.</span></h5>
+                </div>
+            </div>
+            </div>
+            
+      <div class="row">
+       <div class="container">
+                <div class="col s12 left-align">
+                    <h5><span class="bold red-text text-darken-4">Attack Portals</span><span class="thin"> When a portal is occupied by a team, the other team can attack the portal. A occupied portal needs two attacks to be taken over by another team.</span></h5>
+                </div>
+            </div>
+            </div>
+            
+        <div class="row">
+       <div class="container">
+                <div class="col s12 left-align">
+                    <h5><span class="bold red-text text-darken-4">Shield State</span><span class="thin"> When a portal has been attacked, it will immediately go into a shield state of one hour. During this period, nobody can attack the tower.</span></h5>
+                </div>
+            </div>
+            </div>
+            
+        <div class="row">
+       <div class="container">
+                <div class="col s12 left-align">
+                    <h5><span class="bold red-text text-darken-4">Heal</span><span class="thin"> When a portal has been attacked, its owner team can use the hack button to heal the portal. Healing the tower resulting in a recover from the damage of one attack.</span></h5>
+                </div>
+            </div>
+            </div>
+      
+    </body>
+  </html>
+      
+    </body>
+  </html>

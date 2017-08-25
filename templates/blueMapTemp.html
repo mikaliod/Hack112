@@ -1,0 +1,150 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Mapview</title>
+      
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+       <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      
+      <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; background-color:#0d47a1;}
+      #map { height: 91%; }
+    </style>
+    </head>
+
+    <body>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script type="text/javascript" src="https://www.l2.io/ip.js?var=myip"></script>
+       <!--NavBar-->
+      <div class="navbar-fixed">
+      <nav>
+      <div class="nav-wrapper blue darken-4">
+        <ul class="left">
+          <li class="active"><a href="{{ url_for('mapBlue') }}">Map</a></li>
+          <li><a href="{{ url_for('portalsBlue') }}">Portals Status</a></li>
+          <li><a href="{{ url_for('helpBlue') }}">Help</a></li>
+        </ul>
+      </div>
+      </nav>
+      </div>
+      
+      <!--The Map-->
+      <div id="map"></div>
+    <script>
+
+function initMap() {
+
+  // Specify features and elements to define styles.
+  var styleArray = [
+    {
+      featureType: "all",
+      stylers: [
+       { hue: "#0d47a1" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "transit",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ];
+
+  // Create a map object and specify the DOM element for display.
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 40.442376, lng: -79.942482},
+    scrollwheel: false,
+    // Apply the map style array to the map.
+    styles: styleArray,
+    zoom: 17
+  });
+  
+  var portalMap = {
+    CFA : {lat:  40.441619 , lng:  -79.942977 },
+    Porter : {lat:  40.4417 , lng:  -79.946314 },
+    Gates : {lat:  40.443437 , lng:  -79.944672 },
+    UC : {lat:  40.443388 , lng:  -79.942001 },
+    MM : {lat:  40.442016 , lng:  -79.941507 },
+    Wean : {lat:  40.442661 , lng:  -79.945831},
+    DH : {lat:  40.442498 , lng:  -79.944479 },
+    Hunt : {lat:  40.441069 , lng:  -79.943728 },
+    SYG : {lat:  40.440751 , lng:  -79.941342 },
+    Donner : {lat:  40.441894 , lng:  -79.940263 },
+    Rez : {lat:  40.447046 , lng:  -79.94672 }
+      }
+      
+// Construct the circle for each value in citymap.
+  for (var portal in portalMap) {
+    // Add the circle for this portal to the map.
+    var portalCircle = new google.maps.Circle({
+      strokeWeight: 0,
+      fillColor: '#000000',
+      fillOpacity: 0.35,
+      map: map,
+      center: portalMap[portal],
+      radius: 21
+    });
+  }
+
+}
+
+
+
+function getLocation() {
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var lat = position.coords.latitude;
+      var long = position.coords.longitude;
+      $.ajax({
+      type: 'POST',
+      url: '/mapBlue',
+      data: JSON.stringify({"latitude": lat,"longitude":long, "color":"Blue"}),
+      contentType: 'application/json;charset=UTF-8',
+      success:function() {
+      jumpBlue()
+      }
+      });
+      console.log(location);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } 
+}
+
+function jumpBlue() {
+  window.location.href="{{ url_for('blueHackResult') }}"
+}
+
+    </script>
+    
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxR1VA7pH9JPgBJlzuudmHFMr9WeS7K-c&signed_in=true&callback=initMap"
+        async defer>
+    </script>
+      
+      <!--The Button-->
+      
+       <div class="fixed-action-btn" style="bottom: 25px; right: 25px;">
+       <a class="waves-effect waves-light btn-large blue darken-4" onclick="getLocation()"><i class="material-icons left">my_location</i>Hack!</a>
+     </div>
+    </body>
+  </html>
